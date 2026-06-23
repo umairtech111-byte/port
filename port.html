@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Umair Ahmad — MEP Revit Modeler, BIM Engineer & HVAC Specialist. Open to UAE, KSA & Qatar opportunities.">
+<title>Umair Ahmad — MEP Revit Modeler & BIM Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════ */
+:root {
+  --bg:        #f0f4f8;
+  --bg2:       #e4ecf5;
+  --white:     #ffffff;
+  --navy:      #1a2e4a;
+  --navy2:     #243b55;
+  --sky:       #2980b9;
+  --sky-dark:  #1f6391;
+  --cyan:      #16a085;
+  --teal:      #1abc9c;
+  --gold:      #e67e22;
+  --lavender:  #8e44ad;
+  --red:       #c0392b;
+  --text:      #2c3e50;
+  --muted:     #7f8c8d;
+  --border:    rgba(41,128,185,0.18);
+  --border2:   rgba(41,128,185,0.30);
+  --card:      #ffffff;
+  --shadow-sm: 0 2px 12px rgba(26,46,74,0.07);
+  --shadow:    0 4px 24px rgba(26,46,74,0.10);
+  --shadow-lg: 0 12px 48px rgba(26,46,74,0.15);
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 20px;
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+ul { list-style: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 2px; }
+
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════ */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sky), var(--teal));
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  max-width: 340px;
+}
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.toast.toast-success { border-left: 4px solid var(--teal); }
+.toast.toast-error   { border-left: 4px solid var(--red); }
+.toast.toast-info    { border-left: 4px solid var(--sky); }
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 56px;
+  height: 68px;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 24px rgba(41,128,185,0.06);
+  transition: height var(--transition);
+}
+nav.scrolled {
+  height: 58px;
+  box-shadow: 0 4px 32px rgba(41,128,185,0.10);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.nav-logo-dot {
+  width: 9px; height: 9px;
+  background: linear-gradient(135deg, var(--sky), var(--teal));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+}
+.nav-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--sky);
+  background: rgba(41,128,185,0.09);
+}
+
+/* Hamburger */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  transition: background var(--transition);
+}
+.nav-burger:hover { background: rgba(41,128,185,0.08); }
+.nav-burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0;
+  z-index: 499;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 8px 32px rgba(41,128,185,0.12);
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-menu a {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+.mobile-menu a:hover { color: var(--sky); background: rgba(41,128,185,0.08); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 56px 80px;
+  background: linear-gradient(145deg, #d8e9f7 0%, #e8f2fb 45%, #d2e4f2 100%);
+}
+
+/* Floating background software labels */
+.bg-floats {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-float {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 5px;
+  border: 1px solid currentColor;
+  letter-spacing: 1.2px;
+  animation: floatItem var(--dur, 14s) ease-in-out var(--delay, 0s) infinite;
+  opacity: var(--base-opacity, 0.10);
+}
+
+@keyframes floatItem {
+  0%, 100% { transform: translateY(0) rotate(0deg);   opacity: var(--base-opacity, 0.10); }
+  33%       { transform: translateY(-18px) rotate(1deg);  opacity: 0.18; }
+  66%       { transform: translateY(10px) rotate(-1deg); opacity: 0.07; }
+}
+
+/* Duct lines background */
+.bg-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+}
+.bg-lines svg { width: 100%; height: 100%; }
+
+/* Hero content */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--teal);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1.5px;
+  background: var(--teal);
+}
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5.5vw, 70px);
+  line-height: 1.08;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.hero-name .accent { color: var(--sky); font-style: italic; }
+
+/* Typing animation */
+.hero-typing {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--sky);
+  letter-spacing: 0.5px;
+  min-height: 22px;
+  margin-bottom: 20px;
+}
+.cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--sky);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-titles {
+  margin: 16px 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hero-title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--navy2);
+}
+.hticon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.hticon-blue { background: rgba(52,152,219,0.16); }
+.hticon-teal { background: rgba(26,188,156,0.16); }
+.hticon-gold { background: rgba(230,126,34,0.16); }
+
+.hero-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-desc strong { color: var(--navy); }
+.hero-desc .highlight { color: var(--sky); font-weight: 700; }
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--sky);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(41,128,185,0.35);
+}
+.btn-primary:hover {
+  background: var(--sky-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(41,128,185,0.45);
+}
+.btn-outline {
+  background: rgba(255,255,255,0.75);
+  color: var(--navy);
+  border: 1.5px solid rgba(41,128,185,0.28);
+}
+.btn-outline:hover {
+  background: #fff;
+  border-color: var(--sky);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.btn-teal {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(26,188,156,0.35);
+}
+.btn-teal:hover {
+  background: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(26,188,156,0.45);
+}
+
+/* Hero right card */
+.hero-card {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(41,128,185,0.20);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 36px rgba(41,128,185,0.12);
+}
+.hero-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--sky);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(41,128,185,0.12);
+}
+.chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.chip-bim  { background: rgba(52,152,219,0.12);  color: #2980b9; border: 1px solid rgba(52,152,219,0.25); }
+.chip-hvac { background: rgba(26,188,156,0.12);  color: #16a085; border: 1px solid rgba(26,188,156,0.25); }
+.chip-sw   { background: rgba(230,126,34,0.12);  color: #d35400; border: 1px solid rgba(230,126,34,0.25); }
+.chip-sim  { background: rgba(142,68,173,0.12);  color: #7d3c98; border: 1px solid rgba(142,68,173,0.25); }
+.chip-std  { background: rgba(192,57,43,0.10);   color: #922b21; border: 1px solid rgba(192,57,43,0.20); }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hstat {
+  background: rgba(41,128,185,0.07);
+  border: 1px solid rgba(41,128,185,0.13);
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: all var(--transition);
+}
+.hstat:hover { background: rgba(41,128,185,0.12); transform: scale(1.03); }
+.hstat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--sky);
+  line-height: 1;
+  font-weight: 700;
+}
+.hstat-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: bounceDown 2.2s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px; height: 38px;
+  background: linear-gradient(to bottom, rgba(41,128,185,0.35), transparent);
+}
+@keyframes bounceDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════════════ */
+section { padding: 96px 56px; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.sec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 10px;
+}
+.sec-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--sky);
+}
+
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.15;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.sec-title em { color: var(--sky); font-style: italic; }
+
+.sec-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.78;
+  max-width: 580px;
+}
+
+.sec-head { margin-bottom: 52px; }
+
+/* Divider */
+.sec-divider {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--sky), var(--teal));
+  border-radius: 2px;
+  margin: 14px 0 18px;
+}
+
+/* ═══════════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left  { opacity: 0; transform: translateX(-30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal-right { opacity: 0; transform: translateX(30px);  transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal-left.visible,
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+#about { background: var(--white); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-block { margin-bottom: 26px; }
+.about-block-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.abt-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.abt-dot-blue   { background: var(--sky); }
+.abt-dot-teal   { background: var(--teal); }
+.abt-dot-gold   { background: var(--gold); }
+.abt-dot-lav    { background: var(--lavender); }
+
+.about-block p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.82;
+}
+.about-block p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Info pills */
+.info-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.info-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: all var(--transition);
+}
+.info-pill:hover {
+  border-color: var(--sky);
+  background: rgba(41,128,185,0.06);
+}
+
+/* Capability cards */
+.cap-stack { display: flex; flex-direction: column; gap: 12px; }
+.cap-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: all var(--transition);
+}
+.cap-card:hover {
+  border-color: var(--sky);
+  box-shadow: var(--shadow);
+  transform: translateX(5px);
+  background: var(--white);
+}
+.cap-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.cap-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.cap-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════════ */
+#experience { background: var(--bg2); }
+
+.exp-timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.exp-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sky) 0%, var(--teal) 60%, transparent 100%);
+  border-radius: 2px;
+}
+
+.exp-block { position: relative; margin-bottom: 32px; }
+.exp-block::before {
+  content: '';
+  position: absolute;
+  left: -38px; top: 20px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--sky);
+  border: 3px solid var(--bg2);
+  box-shadow: 0 0 0 4px rgba(41,128,185,0.18);
+  transition: transform var(--transition);
+}
+.exp-block:hover::before { transform: scale(1.2); }
+
+.exp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.exp-card:hover {
+  border-color: var(--sky);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.exp-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.exp-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--navy);
+}
+.exp-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--sky);
+  background: rgba(41,128,185,0.06);
+  white-space: nowrap;
+}
+.exp-company {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sky);
+  margin-bottom: 18px;
+}
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.exp-list li {
+  display: flex;
+  gap: 12px;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.68;
+}
+.exp-list li::before {
+  content: '▸';
+  color: var(--teal);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.exp-list li strong { color: var(--text); }
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(41,128,185,0.08);
+  border: 1px solid rgba(41,128,185,0.20);
+  color: var(--sky);
+  transition: all var(--transition);
+}
+.tag:hover { background: rgba(41,128,185,0.16); }
+
+/* Internship mini cards */
+.intern-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+.intern-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.intern-card:hover {
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.intern-card::before {
+  content: '';
+  position: absolute;
+  left: -38px; top: 22px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid var(--bg2);
+}
+.intern-title { font-weight: 700; font-size: 13.5px; color: var(--navy); margin-bottom: 4px; }
+.intern-co    { font-size: 12px; color: var(--sky); font-weight: 600; margin-bottom: 8px; }
+.intern-desc  { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   PROJECTS — TABS
+═══════════════════════════════════════════ */
+#projects { background: var(--white); }
+
+.proj-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.ptab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.ptab:hover { border-color: var(--sky); color: var(--sky); background: rgba(41,128,185,0.06); }
+.ptab.on    { background: var(--sky); color: #fff; border-color: var(--sky); box-shadow: 0 4px 16px rgba(41,128,185,0.30); }
+.ptab-dot   { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+.tab-pane        { display: none; }
+.tab-pane.on     { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
+.tab-pane.on.full{ grid-template-columns: 1fr; }
+
+/* Project card */
+.pcard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: all var(--transition);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pcard:hover {
+  border-color: var(--sky);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  background: var(--white);
+}
+.pcard-num  { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--sky); letter-spacing: 2px; }
+.pcard-name { font-weight: 700; font-size: 14px; color: var(--navy); line-height: 1.4; }
+.pcard-sub  { font-size: 11.5px; color: var(--teal); font-weight: 600; }
+.pcard-desc { font-size: 12.5px; color: var(--muted); line-height: 1.68; margin-top: 4px; }
+
+/* FYP card */
+.fyp-card {
+  background: linear-gradient(140deg, #1a2e4a 0%, #243b55 100%);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  color: var(--bg);
+  border: none;
+}
+.fyp-card .pcard-num  { color: var(--teal); }
+.fyp-card .pcard-name { color: #f0f4f8; font-size: 22px; }
+.fyp-card .pcard-sub  { color: rgba(240,244,248,0.60); }
+.fyp-card .pcard-desc { color: rgba(240,244,248,0.78); font-size: 13.5px; line-height: 1.82; }
+.fyp-card:hover       { background: linear-gradient(140deg, #1a2e4a 0%, #243b55 100%); transform: translateY(-4px); }
+
+.fyp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.fyp-tag {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #f0f4f8;
+  font-size: 11px;
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════
+   PROJECT WORK GALLERY
+═══════════════════════════════════════════ */
+#projectwork { background: var(--bg2); }
+
+.pw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.pw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 22px;
+}
+
+.pw-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 72px 20px;
+  color: var(--muted);
+}
+.pw-empty-icon { font-size: 52px; margin-bottom: 16px; opacity: 0.35; }
+.pw-empty p    { font-size: 14px; line-height: 1.7; }
+.pw-empty strong { color: var(--text); }
+
+/* Gallery item card */
+.pw-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.pw-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+  border-color: var(--sky);
+}
+
+.pw-item-img {
+  width: 100%; height: 210px;
+  object-fit: cover;
+  display: block;
+  background: var(--bg);
+  transition: transform 0.4s ease;
+}
+.pw-item:hover .pw-item-img { transform: scale(1.03); }
+
+.pw-img-wrap { overflow: hidden; height: 210px; flex-shrink: 0; }
+
+.pw-placeholder {
+  width: 100%; height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg), var(--bg2));
+  font-size: 44px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.pw-item-body {
+  padding: 18px 20px;
+  flex: 1;
+}
+.pw-item-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.pw-item-title { font-weight: 700; font-size: 14.5px; color: var(--navy); margin-bottom: 7px; }
+.pw-item-desc  { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+.pw-item-footer {
+  padding: 10px 20px 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+.pw-del-btn {
+  font-size: 11px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pw-del-btn:hover { color: var(--red); background: rgba(192,57,43,0.08); }
+
+/* ═══════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════ */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(20,36,60,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px 38px;
+  width: 500px;
+  max-width: 96vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 28px 80px rgba(26,46,74,0.28);
+  animation: popIn 0.32s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+@keyframes popIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px; right: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all var(--transition);
+}
+.modal-close:hover { color: var(--text); background: var(--bg2); }
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  padding-right: 36px;
+}
+
+/* Form elements */
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 7px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--sky);
+  box-shadow: 0 0 0 3px rgba(41,128,185,0.12);
+}
+.form-group textarea { min-height: 84px; resize: vertical; }
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--bg);
+}
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--sky);
+  background: rgba(41,128,185,0.05);
+}
+.upload-zone p { font-size: 13px; color: var(--muted); }
+.upload-zone .uz-link { color: var(--sky); font-weight: 600; }
+.upload-zone .uz-sub  { font-size: 11px; margin-top: 4px; }
+
+#imgPreview {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+  display: none;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+.modal-actions .btn { flex: 1; justify-content: center; }
+
+/* Password modal */
+.pwd-modal-box { width: 380px; text-align: center; }
+.pwd-lock { font-size: 44px; margin-bottom: 14px; }
+.pwd-modal-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+.pwd-modal-box p  { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+
+.pwd-wrap { position: relative; margin-bottom: 8px; }
+.pwd-wrap input {
+  width: 100%;
+  padding: 13px 46px 13px 18px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  font-size: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  letter-spacing: 4px;
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.pwd-wrap input:focus { border-color: var(--sky); box-shadow: 0 0 0 4px rgba(41,128,185,0.12); }
+.pwd-wrap input.wrong { border-color: var(--red); animation: shake 0.45s ease; }
+.pwd-eye {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+.pwd-eye:hover { color: var(--text); }
+.pwd-error { font-size: 12px; color: var(--red); min-height: 18px; margin-bottom: 10px; }
+.pwd-hint  { font-size: 11px; color: var(--muted); margin-top: 14px; }
+.pwd-hint span { color: var(--sky); font-weight: 600; }
+
+@keyframes shake {
+  0%,100%{ transform:translateX(0); }
+  20%    { transform:translateX(-9px); }
+  40%    { transform:translateX(9px); }
+  60%    { transform:translateX(-6px); }
+  80%    { transform:translateX(6px); }
+}
+
+/* ═══════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════ */
+#skills { background: var(--white); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+  gap: 18px;
+}
+.scat-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: all var(--transition);
+}
+.scat-card:hover { border-color: var(--sky); box-shadow: var(--shadow); }
+
+.scat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.scat-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.scat-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spills { display: flex; flex-wrap: wrap; gap: 6px; }
+.sp {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+}
+.sp:hover { transform: scale(1.05); }
+.sp-adv { background: rgba(41,128,185,0.10); border-color: rgba(41,128,185,0.25); color: var(--sky); }
+.sp-int { background: rgba(230,126,34,0.10); border-color: rgba(230,126,34,0.25); color: var(--gold); }
+.sp-std { background: rgba(26,188,156,0.10); border-color: rgba(26,188,156,0.25); color: var(--teal); }
+.sp-neu { background: rgba(26,46,74,0.06);   border-color: rgba(26,46,74,0.12);   color: var(--text); }
+
+/* Skill bars */
+.skill-bars { margin-top: 48px; }
+.skill-bars-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+.sbar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 52px;
+}
+.sbar { margin-bottom: 18px; }
+.sbar-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.sbar-name { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.sbar-pct  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--sky); }
+.sbar-track {
+  height: 6px;
+  background: var(--bg2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sbar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--sky), var(--teal));
+  width: 0;
+  transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ═══════════════════════════════════════════
+   EDUCATION
+═══════════════════════════════════════════ */
+#education { background: var(--bg2); }
+
+.edu-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+}
+.edu-col-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.edu-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 12px;
+  transition: all var(--transition);
+}
+.edu-card:hover { border-color: var(--sky); box-shadow: var(--shadow); }
+.edu-deg { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.edu-sch { font-size: 12.5px; color: var(--sky); font-weight: 600; margin-bottom: 10px; }
+.edu-meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+.edu-gpa  { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+
+.cert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 16px;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  transition: all var(--transition);
+}
+.cert-item:hover { border-color: var(--sky); transform: translateX(3px); }
+.cert-name { color: var(--text); flex: 1; line-height: 1.45; }
+.cert-yr   { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--teal); font-weight: 600; white-space: nowrap; }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact {
+  background: linear-gradient(145deg, #d6e7f5 0%, #e5f0f9 100%);
+  text-align: center;
+}
+
+.gcc-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 48px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(41,128,185,0.22);
+  border-radius: var(--radius);
+  padding: 14px 26px;
+  font-size: 14px;
+  color: var(--navy);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+.gcc-flags { font-size: 22px; letter-spacing: 4px; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.ccard {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(41,128,185,0.18);
+  border-radius: var(--radius);
+  padding: 22px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.ccard:hover {
+  background: var(--white);
+  border-color: var(--sky);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.ccard-icon  { font-size: 28px; margin-bottom: 10px; }
+.ccard-label { font-size: 9.5px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.ccard-val   { font-size: 12px; color: var(--navy); font-weight: 600; word-break: break-all; line-height: 1.4; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 24px 56px;
+  background: #cfe0ef;
+  border-top: 1px solid rgba(41,128,185,0.15);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+footer span { color: var(--sky); font-weight: 600; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 0 22px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  section { padding: 68px 22px; }
+
+  .hero { padding: 110px 22px 70px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-card { display: none; }
+
+  .about-grid,
+  .edu-layout,
+  .intern-row { grid-template-columns: 1fr; }
+
+  .sbar-grid { grid-template-columns: 1fr; gap: 0; }
+
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+
+  .tab-pane.on { grid-template-columns: 1fr; }
+
+  .pw-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { width: 100%; justify-content: center; }
+  footer { padding: 20px 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="nav-logo" aria-label="Umair Ahmad">
+    <div class="nav-logo-dot"></div>
+    Umair Ahmad
+  </div>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#about"       aria-label="About section">About</a></li>
+    <li><a href="#experience"  aria-label="Experience section">Experience</a></li>
+    <li><a href="#projects"    aria-label="Projects section">Projects</a></li>
+    <li><a href="#projectwork" aria-label="Project Work section">Work Gallery</a></li>
+    <li><a href="#skills"      aria-label="Skills section">Skills</a></li>
+    <li><a href="#education"   aria-label="Education section">Education</a></li>
+    <li><a href="#contact"     aria-label="Contact section">Contact</a></li>
+  </ul>
+
+  <button class="nav-burger" id="burger" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a href="#about"       onclick="closeMobileMenu()">About</a>
+  <a href="#experience"  onclick="closeMobileMenu()">Experience</a>
+  <a href="#projects"    onclick="closeMobileMenu()">Projects</a>
+  <a href="#projectwork" onclick="closeMobileMenu()">Work Gallery</a>
+  <a href="#skills"      onclick="closeMobileMenu()">Skills</a>
+  <a href="#education"   onclick="closeMobileMenu()">Education</a>
+  <a href="#contact"     onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="home" aria-label="Hero section">
+
+  <!-- Floating software labels -->
+  <div class="bg-floats" aria-hidden="true">
+    <div class="bg-float" style="top:8%;  left:5%;  color:#e74c3c; --dur:12s; --delay:0s;   --base-opacity:0.10">Revit MEP</div>
+    <div class="bg-float" style="top:15%; left:22%; color:#2ecc71; --dur:14s; --delay:1s;   --base-opacity:0.10">SolidWorks</div>
+    <div class="bg-float" style="top:6%;  left:45%; color:#3498db; --dur:11s; --delay:2s;   --base-opacity:0.10">Navisworks</div>
+    <div class="bg-float" style="top:20%; left:68%; color:#f39c12; --dur:16s; --delay:0.5s; --base-opacity:0.10">ANSYS</div>
+    <div class="bg-float" style="top:5%;  left:82%; color:#9b59b6; --dur:13s; --delay:3s;   --base-opacity:0.10">AutoCAD</div>
+    <div class="bg-float" style="top:40%; left:3%;  color:#1abc9c; --dur:15s; --delay:1.5s; --base-opacity:0.10">BIM</div>
+    <div class="bg-float" style="top:55%; left:18%; color:#e67e22; --dur:12s; --delay:2.5s; --base-opacity:0.10">ABAQUS</div>
+    <div class="bg-float" style="top:38%; left:78%; color:#3498db; --dur:17s; --delay:0.8s; --base-opacity:0.10">COMSOL</div>
+    <div class="bg-float" style="top:65%; left:60%; color:#2ecc71; --dur:14s; --delay:4s;   --base-opacity:0.10">HVAC</div>
+    <div class="bg-float" style="top:75%; left:88%; color:#e74c3c; --dur:11s; --delay:1.2s; --base-opacity:0.10">MEP</div>
+    <div class="bg-float" style="top:80%; left:30%; color:#f39c12; --dur:13s; --delay:3.5s; --base-opacity:0.10">LOD 400</div>
+    <div class="bg-float" style="top:88%; left:55%; color:#9b59b6; --dur:16s; --delay:2s;   --base-opacity:0.10">ISO 19650</div>
+    <div class="bg-float" style="top:50%; left:40%; color:#1abc9c; --dur:18s; --delay:0.3s; --base-opacity:0.08">Piping</div>
+    <div class="bg-float" style="top:30%; left:90%; color:#3498db; --dur:12s; --delay:5s;   --base-opacity:0.10">Ducting</div>
+  </div>
+
+  <!-- Duct/pipe SVG lines -->
+  <div class="bg-lines" aria-hidden="true">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#2980b9">
+      <path d="M0 200 H400 V500 H900 V300 H1400"   stroke-width="2"   stroke-dasharray="9 7"/>
+      <path d="M0 600 H300 V400 H700 V700 H1400"   stroke-width="1.5" stroke-dasharray="6 9"/>
+      <path d="M100 0 V300 H600 V150 H1200 V400"   stroke-width="1"   stroke-dasharray="5 10"/>
+      <circle cx="400" cy="200" r="9" fill="none" stroke-width="2"/>
+      <circle cx="900" cy="300" r="9" fill="none" stroke-width="2"/>
+      <circle cx="700" cy="700" r="7" fill="none" stroke-width="1.5"/>
+      <circle cx="600" cy="150" r="6" fill="none" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+
+    <!-- LEFT column -->
+    <div>
+      <div class="hero-eyebrow" aria-label="Portfolio — Umair Ahmad">
+        ✦ Portfolio — Umair Ahmad
+      </div>
+
+      <h1 class="hero-name">
+        Mechanical<br>
+        <span class="accent">BIM</span> Engineer
+      </h1>
+
+      <div class="hero-typing" aria-label="Dynamic role description">
+        <span id="typedText"></span><span class="cursor" aria-hidden="true"></span>
+      </div>
+
+      <div class="hero-titles" aria-label="Specializations">
+        <div class="hero-title-row">
+          <span class="hticon hticon-blue" aria-hidden="true">🏗️</span>
+          MEP Revit Modeler &amp; Detailer
+        </div>
+        <div class="hero-title-row">
+          <span class="hticon hticon-teal" aria-hidden="true">🌬️</span>
+          HVAC Ducting Modeler &amp; Detailer
+        </div>
+        <div class="hero-title-row">
+          <span class="hticon hticon-gold" aria-hidden="true">🔧</span>
+          HVAC Piping Modeler &amp; Detailer
+        </div>
+        <div class="hero-title-row">
+          <span class="hticon hticon-blue" aria-hidden="true">📐</span>
+          BIM Coordinator · Clash Detection Expert
+        </div>
+      </div>
+
+      <p class="hero-desc">
+        Delivering precision <strong>MEP BIM models</strong>, detailed HVAC ducting &amp; piping layouts,
+        and multidisciplinary coordination for international construction projects.
+        Based in Pakistan — open to <span class="highlight">UAE · KSA · Qatar</span> opportunities.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#contact"     class="btn btn-primary"  aria-label="Contact Umair Ahmad">⟶ Hire Me Now</a>
+        <a href="#projects"    class="btn btn-outline"  aria-label="View all projects">View Projects</a>
+        <a href="#projectwork" class="btn btn-outline"  aria-label="View project gallery">📸 Work Gallery</a>
+      </div>
+    </div>
+
+    <!-- RIGHT card -->
+    <div class="hero-card reveal-right" aria-label="Core expertise keywords and statistics">
+      <div class="hero-card-label">// Core Expertise</div>
+      <div class="chip-wrap">
+        <span class="chip chip-bim">Revit MEP</span>
+        <span class="chip chip-bim">Navisworks</span>
+        <span class="chip chip-hvac">HVAC Ducting</span>
+        <span class="chip chip-hvac">Piping Systems</span>
+        <span class="chip chip-bim">BIM Coordination</span>
+        <span class="chip chip-hvac">Clash Detection</span>
+        <span class="chip chip-bim">Shop Drawings</span>
+        <span class="chip chip-bim">LOD 300–450</span>
+        <span class="chip chip-sw">SolidWorks</span>
+        <span class="chip chip-sim">ANSYS</span>
+        <span class="chip chip-sim">ABAQUS</span>
+        <span class="chip chip-sim">COMSOL</span>
+        <span class="chip chip-std">ISO 19650</span>
+        <span class="chip chip-std">IFC / BEP</span>
+        <span class="chip chip-hvac">AutoCAD</span>
+      </div>
+      <div class="hero-stats" aria-label="Key statistics">
+        <div class="hstat">
+          <div class="hstat-num">3+</div>
+          <div class="hstat-label">BIM/MEP Projects</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">6+</div>
+          <div class="hstat-label">SolidWorks Projects</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">3.53</div>
+          <div class="hstat-label">CGPA — UET Mardan</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">7+</div>
+          <div class="hstat-label">Certifications</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">Scroll</div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section id="about" aria-label="About Umair Ahmad">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Who I Am</div>
+      <h2 class="sec-title">About <em>Umair Ahmad</em></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">A detail-driven Mechanical BIM Engineer with real international project experience, a strong simulation background, and the technical depth GCC employers are looking for.</p>
+    </div>
+
+    <div class="about-grid">
+
+      <!-- Left: Bio -->
+      <div>
+        <div class="about-block reveal">
+          <div class="about-block-header">
+            <div class="abt-dot abt-dot-blue"></div>
+            Professional Profile
+          </div>
+          <p>I am a <strong>Mechanical BIM Engineer</strong> and <strong>MEP Revit Modeler &amp; Detailer</strong> with hands-on professional experience at <strong>BIMTEQ</strong>, a Pakistan-based firm serving American clients in Houston, USA. I have modeled, coordinated, and detailed full MEP systems — HVAC ducting, chilled water, ventilation, and plumbing — for multi-floor international projects at <strong>LOD 400–450</strong>.</p>
+        </div>
+
+        <div class="about-block reveal">
+          <div class="about-block-header">
+            <div class="abt-dot abt-dot-teal"></div>
+            HVAC Ducting &amp; Piping
+          </div>
+          <p>Specialized in <strong>HVAC Ducting Modeling &amp; Detailing</strong> and <strong>Piping Systems Design</strong> using <strong>Autodesk Revit MEP</strong>. I develop accurate 3D duct layouts, piping networks (chilled water, water supply, drainage), and coordinate all systems to avoid clashes before construction — saving time and cost on site.</p>
+        </div>
+
+        <div class="about-block reveal">
+          <div class="about-block-header">
+            <div class="abt-dot abt-dot-gold"></div>
+            BIM Coordination &amp; Clash Detection
+          </div>
+          <p>Using <strong>Autodesk Navisworks</strong>, I perform full multidisciplinary BIM coordination — identifying and resolving clashes between mechanical, electrical, plumbing, architectural, and structural models. I prepare detailed clash detection reports and coordinate with all discipline teams to ensure zero-conflict construction documents.</p>
+        </div>
+
+        <div class="about-block reveal">
+          <div class="about-block-header">
+            <div class="abt-dot abt-dot-lav"></div>
+            Simulation &amp; Engineering Analysis
+          </div>
+          <p>Beyond BIM, I have strong skills in <strong>SolidWorks</strong> (Advanced — 3D modeling, assemblies, motion study, FEA), <strong>ANSYS</strong> (Advanced — structural, thermal, CFD/CFX), <strong>ABAQUS</strong> (Intermediate — explicit dynamics), and <strong>COMSOL Multiphysics</strong> (Intermediate — multiphase CFD). These skills make me a versatile mechanical engineer capable of both design and analysis.</p>
+        </div>
+
+        <div class="info-pills reveal">
+          <span class="info-pill">📍 Peshawar, Pakistan</span>
+          <span class="info-pill">🎓 B.Sc. Mechanical Engineering — UET Mardan</span>
+          <span class="info-pill">🌐 Open: UAE · KSA · Qatar</span>
+          <span class="info-pill">🗣️ English · Urdu · Pashto</span>
+        </div>
+      </div>
+
+      <!-- Right: Capability cards -->
+      <div class="cap-stack reveal-right">
+        <div class="cap-card">
+          <div class="cap-icon" style="background:rgba(41,128,185,0.12)">🏗️</div>
+          <div>
+            <div class="cap-title">MEP Revit Modeling &amp; Detailing</div>
+            <div class="cap-desc">Full MEP system models in Revit MEP — mechanical, electrical, and plumbing — developed to LOD 300–450 with accurate families, parameters, and detailing for fabrication and construction.</div>
+          </div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon" style="background:rgba(26,188,156,0.12)">🌬️</div>
+          <div>
+            <div class="cap-title">HVAC Ducting Modeling &amp; Detailing</div>
+            <div class="cap-desc">Layout, sizing, and 3D detailing of supply, return, and exhaust duct systems. Includes flexible duct connections, VAV boxes, AHU connections, and coordination with ceiling and structural elements.</div>
+          </div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon" style="background:rgba(230,126,34,0.12)">🔧</div>
+          <div>
+            <div class="cap-title">Piping Modeling &amp; Detailing</div>
+            <div class="cap-desc">Chilled water, condenser water, domestic water supply, drainage, and fire protection piping — fully modeled with slopes, hangers, and coordination clearances.</div>
+          </div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon" style="background:rgba(142,68,173,0.12)">🔍</div>
+          <div>
+            <div class="cap-title">Clash Detection &amp; BIM Coordination</div>
+            <div class="cap-desc">Navisworks-based clash detection across all disciplines. Systematic identification, reporting, and resolution of hard and soft clashes — supporting RFI generation and coordinated construction documents.</div>
+          </div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon" style="background:rgba(192,57,43,0.12)">📐</div>
+          <div>
+            <div class="cap-title">Shop Drawing Preparation</div>
+            <div class="cap-desc">Production of MEP shop drawings, spool drawings, and coordination drawings from BIM models — ready for fabrication, installation, and site team use, meeting project standards.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════ -->
+<section id="experience" aria-label="Professional experience">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Work History</div>
+      <h2 class="sec-title">Professional <em>Experience</em></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">International project exposure through US-based BIM/MEP work at BIMTEQ, plus two engineering internships at Pakistan's leading industrial facilities.</p>
+    </div>
+
+    <div class="exp-timeline">
+
+      <!-- Main role -->
+      <div class="exp-block reveal">
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-role">BIM Engineer</div>
+            <div class="exp-badge">Aug 2025 – May 2026</div>
+          </div>
+          <div class="exp-company">BIMTEQ — Lahore, Pakistan · American Houston HQ (USA)</div>
+          <ul class="exp-list">
+            <li><span>Developed <strong>MEP BIM models up to LOD 400–450</strong> in Revit MEP — including HVAC ducting systems, chilled water piping, ventilation networks, and plumbing systems for multi-floor US healthcare and commercial projects.</span></li>
+            <li><span>Performed <strong>HVAC ducting modeling &amp; detailing</strong> — supply, return, and exhaust duct layouts, VAV connections, and coordination with architectural and structural elements.</span></li>
+            <li><span>Modeled and detailed <strong>piping systems</strong> — chilled water, condenser water, domestic water supply, drainage — ensuring proper slopes, clearances, and hanger placements.</span></li>
+            <li><span>Executed <strong>clash detection &amp; BIM coordination</strong> using Navisworks — identified and resolved 100+ hard/soft clashes across mechanical, electrical, and plumbing disciplines.</span></li>
+            <li><span>Prepared detailed <strong>MEP shop drawings &amp; coordination drawings</strong> to support fabrication, installation, and site execution for US construction teams.</span></li>
+            <li><span>Collaborated with multidisciplinary teams across mechanical, electrical, structural, and architectural disciplines, ensuring timely and accurate project delivery.</span></li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Revit MEP</span>
+            <span class="tag">Navisworks</span>
+            <span class="tag">HVAC Ducting</span>
+            <span class="tag">Piping Systems</span>
+            <span class="tag">Clash Detection</span>
+            <span class="tag">BIM Coordination</span>
+            <span class="tag">Shop Drawings</span>
+            <span class="tag">LOD 400–450</span>
+            <span class="tag">AutoCAD</span>
+            <span class="tag">ISO 19650</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Internships -->
+      <div class="intern-row reveal">
+        <div class="intern-card">
+          <div class="intern-title">Pakistan Locomotive Factory</div>
+          <div class="intern-co">Risalpur · Aug 2023 · 1 Month</div>
+          <div class="intern-desc">Hands-on exposure to large-scale mechanical systems, manufacturing processes, and industrial engineering operations at Pakistan's premier locomotive manufacturing facility.</div>
+        </div>
+        <div class="intern-card">
+          <div class="intern-title">Aircraft Rebuild Factory — PAC Kamra</div>
+          <div class="intern-co">PAC Kamra · Jul–Aug 2024 · 2 Weeks</div>
+          <div class="intern-desc">Gained insight into precision engineering, quality systems, and complex mechanical operations at Pakistan's leading aeronautical complex.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROJECTS
+════════════════════════════════════════ -->
+<section id="projects" aria-label="Project portfolio">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Technical Work</div>
+      <h2 class="sec-title">Project <em>Portfolio</em></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">Complete record of BIM/MEP coordination projects, SolidWorks mechanical designs, engineering simulations, and the Final Year Design Project.</p>
+    </div>
+
+    <div class="proj-tabs reveal" role="tablist" aria-label="Project categories">
+      <button class="ptab on" role="tab" aria-selected="true"  aria-controls="tp-bim" onclick="showTab('bim',this)"><span class="ptab-dot"></span>BIM / MEP Projects</button>
+      <button class="ptab"    role="tab" aria-selected="false" aria-controls="tp-sw"  onclick="showTab('sw', this)"><span class="ptab-dot"></span>SolidWorks</button>
+      <button class="ptab"    role="tab" aria-selected="false" aria-controls="tp-sim" onclick="showTab('sim',this)"><span class="ptab-dot"></span>ANSYS / ABAQUS / COMSOL</button>
+      <button class="ptab"    role="tab" aria-selected="false" aria-controls="tp-fyp" onclick="showTab('fyp',this)"><span class="ptab-dot"></span>Final Year Project</button>
+    </div>
+
+    <!-- BIM tab -->
+    <div class="tab-pane on" id="tp-bim" role="tabpanel">
+      <div class="pcard reveal">
+        <div class="pcard-num">BIM-01 · Revit MEP / Navisworks</div>
+        <div class="pcard-name">HCA Healthcare – Clearlake Campus</div>
+        <div class="pcard-sub">6-Floor Healthcare Facility · USA</div>
+        <div class="pcard-desc">Full MEP BIM coordination — HVAC ducting layouts (supply, return, exhaust), chilled water &amp; ventilation systems, and plumbing networks. Performed clash detection using Navisworks, resolved design conflicts, updated models per coordination reviews, and produced MEP shop drawings. LOD 400–450.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">BIM-02 · Revit MEP / Navisworks</div>
+        <div class="pcard-name">Baytown Campus – Borden Street Building</div>
+        <div class="pcard-sub">4-Floor Renovation · USA</div>
+        <div class="pcard-desc">Developed coordinated 3D MEP models based on renovation requirements — HVAC, plumbing, and electrical systems. Performed clash detection and coordination using Navisworks. Prepared HVAC/piping/electrical shop drawings and coordination drawings to support site installation and fabrication.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">BIM-03 · Revit MEP / Navisworks</div>
+        <div class="pcard-name">New Caney I.S.D – Elementary School</div>
+        <div class="pcard-sub">1-Floor New Build · USA</div>
+        <div class="pcard-desc">HVAC and plumbing systems modeling for a new elementary school — including model development, piping population, and HVAC layout coordination per project drawings. Clash detection using Navisworks. Collaborated as part of the BIM coordination team for overall project completion.</div>
+      </div>
+    </div>
+
+    <!-- SolidWorks tab -->
+    <div class="tab-pane" id="tp-sw" role="tabpanel">
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-01 · SolidWorks</div>
+        <div class="pcard-name">Steam Engine with Horizontal Beam &amp; Centrifugal Pump</div>
+        <div class="pcard-desc">Designed and modeled a functional steam engine system with accurate mechanical linkages. Applied motion studies to simulate real-time operation, focusing on constraints, joints, and assembly interactions for realistic mechanical behavior.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-02 · SolidWorks</div>
+        <div class="pcard-name">Four-Cylinder Engine Model</div>
+        <div class="pcard-desc">Detailed 4-cylinder engine assembly — pistons, crankshaft, connecting rods. Used mates and motion study to simulate real-time mechanical movement, demonstrating strong part modeling, assembly, and motion analysis skills.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-03 · SolidWorks</div>
+        <div class="pcard-name">Functional 6-Cylinder Radial Engine</div>
+        <div class="pcard-desc">Advanced 3D part design and complex assembly of a radial engine. Applied motion study to simulate realistic piston-crank synchronization — demonstrating deep understanding of internal combustion engine kinematics.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-04 · SolidWorks (FYDP)</div>
+        <div class="pcard-name">Hybrid Food Dehydrator 3D Model</div>
+        <div class="pcard-desc">3D model of Final Year Design Project — drying chamber, solar collector with glass cover, food trays, frame stand, exhaust fan, blowers, and caster wheels. Supported efficient fabrication planning, optimized airflow and heat retention.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-05 · SolidWorks Simulation (FEA)</div>
+        <div class="pcard-name">FEA Analysis on Stirling Engine</div>
+        <div class="pcard-desc">Performed FEA using SolidWorks Simulation — Von Mises stress, strain, and nodal displacement on critical Stirling engine components. Enhanced structural understanding and supported design optimization for performance.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">SW-06 · SolidWorks + CFD</div>
+        <div class="pcard-name">Shell &amp; Tube Heat Exchanger — Design &amp; CFD</div>
+        <div class="pcard-desc">Complete heat exchanger design with advanced CFD simulations. Evaluated temperature distribution, velocity, and pressure profiles. Integrated analytical and numerical methods to validate thermal performance and heat transfer efficiency.</div>
+      </div>
+    </div>
+
+    <!-- Simulation tab -->
+    <div class="tab-pane" id="tp-sim" role="tabpanel">
+      <div class="pcard reveal">
+        <div class="pcard-num">ANSYS-01 · Static Structural</div>
+        <div class="pcard-name">Static Structural Analysis on Beams</div>
+        <div class="pcard-desc">Evaluated stress distribution, deformation, and load-bearing capacity of beams — verifying structural integrity and optimizing design for safety under mechanical loads.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">ANSYS-02 · Steady State Thermal</div>
+        <div class="pcard-name">Thermal Analysis on Plates</div>
+        <div class="pcard-desc">Assessed heat distribution and thermal gradients under constant temperature exposure. Results informed thermal insulation strategies and material selection for temperature-sensitive applications.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">ANSYS-03 · CFX Fluid Flow</div>
+        <div class="pcard-name">Fluid Flow in Pipes &amp; Ducts</div>
+        <div class="pcard-desc">Used ANSYS CFX to simulate fluid dynamics — analyzing flow velocity, pressure drop, and turbulence in pipes and ducts to enhance system efficiency and inform design improvements.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">ABAQUS-01 · Explicit Dynamics</div>
+        <div class="pcard-name">Bullet Impact Simulation on Metal Plate</div>
+        <div class="pcard-desc">High-velocity bullet impact simulation — studying stress distribution, material deformation, and failure behavior. Highlighted skills in explicit dynamics, meshing, and material modeling under high-strain-rate conditions.</div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcard-num">COMSOL-01 · Multiphase CFD</div>
+        <div class="pcard-name">Microscale Droplet Formation — Dynamic CFD</div>
+        <div class="pcard-desc">1-second transient analysis of microscale oil/water droplet formation. Evaluated pressure, velocity profiles, and volume fraction distribution — demonstrating multiphase flow modeling and transient simulation expertise.</div>
+      </div>
+    </div>
+
+    <!-- FYP tab -->
+    <div class="tab-pane full" id="tp-fyp" role="tabpanel">
+      <div class="pcard fyp-card reveal">
+        <div class="pcard-num">FYDP · Final Year Design Project — B.Sc. Mechanical Engineering</div>
+        <div class="pcard-name">Design &amp; Fabrication of an Affordable Hybrid Food Dehydrator</div>
+        <div class="pcard-sub">Solar / DC / AC Powered System · IoT Monitored · Arduino &amp; ESP8266 · SolidWorks 3D Model</div>
+        <div class="pcard-desc">
+          Developed a low-cost Hybrid Food Dehydrator to reduce post-harvest losses in rural and semi-urban communities. The system runs on solar energy during daytime; an electric heater activates automatically during cloudy or nighttime conditions to maintain consistent drying temperatures.<br><br>
+          An innovative <strong style="color:#f0f4f8">servo-controlled cloth-based shading mechanism</strong> regulates heat by covering the solar collector when temperatures exceed safe limits. <strong style="color:#f0f4f8">IoT-based monitoring</strong> via Arduino and ESP8266 provides real-time temperature &amp; humidity data through a mobile interface, enabling remote monitoring and control. Full 3D model designed in SolidWorks to guide fabrication.
+        </div>
+        <div class="fyp-tags">
+          <span class="fyp-tag">Solar Energy</span>
+          <span class="fyp-tag">IoT Monitoring</span>
+          <span class="fyp-tag">Arduino</span>
+          <span class="fyp-tag">ESP8266</span>
+          <span class="fyp-tag">SolidWorks 3D Model</span>
+          <span class="fyp-tag">Servo Control</span>
+          <span class="fyp-tag">Fabrication</span>
+          <span class="fyp-tag">DC/AC/Solar</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROJECT WORK GALLERY
+════════════════════════════════════════ -->
+<section id="projectwork" aria-label="Project work gallery">
+  <div class="container">
+
+    <div class="pw-header">
+      <div class="reveal">
+        <div class="sec-eyebrow">Visual Gallery</div>
+        <h2 class="sec-title">Projects <em>Work</em></h2>
+        <div class="sec-divider"></div>
+        <p class="sec-desc">Add your own project screenshots and descriptions — fully managed with password protection.</p>
+      </div>
+      <button class="btn btn-teal reveal" onclick="openGalleryModal()" aria-label="Add project image">
+        ＋ Add Project Image
+      </button>
+    </div>
+
+    <div class="pw-grid" id="pwGrid" role="list" aria-label="Project gallery grid">
+      <div class="pw-empty" role="listitem">
+        <div class="pw-empty-icon">🖼️</div>
+        <p>No project images yet.<br>Click <strong>"＋ Add Project Image"</strong> above to add your first project photo.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section id="skills" aria-label="Skills and software">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Technical Arsenal</div>
+      <h2 class="sec-title">Skills &amp; <em>Software</em></h2>
+      <div class="sec-divider"></div>
+      <p class="sec-desc">From BIM coordination and HVAC detailing to FEA simulation and CFD analysis — a full-spectrum mechanical engineering skill set.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="scat-card reveal">
+        <div class="scat-head">
+          <div class="scat-icon" style="background:rgba(41,128,185,0.10)">🏗️</div>
+          <div class="scat-name">BIM &amp; MEP Tools</div>
+        </div>
+        <div class="spills">
+          <span class="sp sp-adv">Revit MEP</span>
+          <span class="sp sp-adv">Navisworks</span>
+          <span class="sp sp-int">AutoCAD</span>
+          <span class="sp sp-std">BIM Coordination</span>
+          <span class="sp sp-std">Clash Detection</span>
+          <span class="sp sp-std">Shop Drawings</span>
+          <span class="sp sp-std">LOD 300–450</span>
+        </div>
+      </div>
+      <div class="scat-card reveal">
+        <div class="scat-head">
+          <div class="scat-icon" style="background:rgba(26,188,156,0.10)">🌬️</div>
+          <div class="scat-name">HVAC &amp; Piping</div>
+        </div>
+        <div class="spills">
+          <span class="sp sp-adv">HVAC Ducting Design</span>
+          <span class="sp sp-adv">HVAC Ducting Detailing</span>
+          <span class="sp sp-adv">Piping Modeling</span>
+          <span class="sp sp-adv">Piping Detailing</span>
+          <span class="sp sp-std">Chilled Water Systems</span>
+          <span class="sp sp-std">Ventilation Systems</span>
+          <span class="sp sp-std">Plumbing Networks</span>
+        </div>
+      </div>
+      <div class="scat-card reveal">
+        <div class="scat-head">
+          <div class="scat-icon" style="background:rgba(230,126,34,0.10)">⚙️</div>
+          <div class="scat-name">CAD / Simulation</div>
+        </div>
+        <div class="spills">
+          <span class="sp sp-adv">SolidWorks</span>
+          <span class="sp sp-adv">ANSYS</span>
+          <span class="sp sp-int">ABAQUS</span>
+          <span class="sp sp-int">COMSOL</span>
+          <span class="sp sp-std">FEA Analysis</span>
+          <span class="sp sp-std">CFD Analysis</span>
+          <span class="sp sp-std">Motion Study</span>
+        </div>
+      </div>
+      <div class="scat-card reveal">
+        <div class="scat-head">
+          <div class="scat-icon" style="background:rgba(142,68,173,0.10)">📋</div>
+          <div class="scat-name">Standards &amp; Soft Skills</div>
+        </div>
+        <div class="spills">
+          <span class="sp sp-std">ISO 19650</span>
+          <span class="sp sp-std">IFC</span>
+          <span class="sp sp-std">BEP</span>
+          <span class="sp sp-adv">MS Excel</span>
+          <span class="sp sp-adv">MS Word</span>
+          <span class="sp sp-adv">MS PowerPoint</span>
+          <span class="sp sp-neu">Team Collaboration</span>
+          <span class="sp sp-neu">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill Bars -->
+    <div class="skill-bars reveal">
+      <div class="skill-bars-title">Proficiency <em style="color:var(--sky)">Levels</em></div>
+      <div class="sbar-grid">
+        <div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">Revit MEP</span><span class="sbar-pct">95%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="95"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">Navisworks</span><span class="sbar-pct">92%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="92"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">HVAC Ducting &amp; Detailing</span><span class="sbar-pct">90%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">Piping Modeling &amp; Detailing</span><span class="sbar-pct">88%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="88"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">SolidWorks</span><span class="sbar-pct">90%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">ANSYS (FEA / CFD)</span><span class="sbar-pct">85%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">AutoCAD</span><span class="sbar-pct">78%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="78"></div></div>
+          </div>
+          <div class="sbar">
+            <div class="sbar-header"><span class="sbar-name">ABAQUS / COMSOL</span><span class="sbar-pct">72%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="72"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EDUCATION
+════════════════════════════════════════ -->
+<section id="education" aria-label="Education and certifications">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Academic Background</div>
+      <h2 class="sec-title">Education &amp; <em>Certifications</em></h2>
+      <div class="sec-divider"></div>
+    </div>
+
+    <div class="edu-layout">
+
+      <!-- Degrees -->
+      <div class="reveal">
+        <div class="edu-col-title">Academic Degrees</div>
+        <div class="edu-card">
+          <div class="edu-deg">B.Sc. Mechanical Engineering</div>
+          <div class="edu-sch">University of Engineering &amp; Technology, Mardan</div>
+          <div class="edu-meta">
+            <span>2021 – 2025</span>
+            <span class="edu-gpa">CGPA: 3.53 / 4.0</span>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-deg">F.Sc. Pre-Engineering</div>
+          <div class="edu-sch">Government College Peshawar</div>
+          <div class="edu-meta">
+            <span>2018 – 2020</span>
+            <span class="edu-gpa">881 / 1100 (80%)</span>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-deg">SSC — Science (Matric)</div>
+          <div class="edu-sch">Hira Public School &amp; College, Peshawar</div>
+          <div class="edu-meta">
+            <span>2016 – 2018</span>
+            <span class="edu-gpa">997 / 1100 (90.63%)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certs -->
+      <div class="reveal">
+        <div class="edu-col-title">Certifications &amp; Workshops</div>
+        <div class="cert-item"><span class="cert-name">2-Day Workshop — 2D &amp; 3D Modeling using SolidWorks</span><span class="cert-yr">Aug 2022</span></div>
+        <div class="cert-item"><span class="cert-name">1-Day Workshop — Mechanical Workshop Technology</span><span class="cert-yr">Sep 2022</span></div>
+        <div class="cert-item"><span class="cert-name">4th International Workshop on Functional Reverse Engineering</span><span class="cert-yr">Dec 2022</span></div>
+        <div class="cert-item"><span class="cert-name">5th International Workshop on Functional Reverse Engineering</span><span class="cert-yr">Dec 2023</span></div>
+        <div class="cert-item"><span class="cert-name">6th International Workshop on Functional Reverse Engineering</span><span class="cert-yr">Dec 2024</span></div>
+        <div class="cert-item"><span class="cert-name">Student Volunteer — Orientation Ceremony, UET Mardan</span><span class="cert-yr">Sep 2024</span></div>
+        <div class="cert-item"><span class="cert-name">Student Volunteer &amp; Participant — Welcome Party, UET Mardan</span><span class="cert-yr">Oct 2024</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section id="contact" aria-label="Contact section">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow">Get In Touch</div>
+      <h2 class="sec-title">Let's <em>Connect</em></h2>
+      <div class="sec-divider" style="margin:14px auto 18px"></div>
+      <p class="sec-desc" style="margin:0 auto">Available for BIM Engineer · MEP Revit Modeler · HVAC Ducting &amp; Piping roles in the GCC region.</p>
+      <div style="text-align:center">
+        <div class="gcc-banner">
+          <span class="gcc-flags">🇦🇪 🇸🇦 🇶🇦</span>
+          Actively seeking opportunities in UAE · Saudi Arabia · Qatar
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <a class="ccard reveal" href="mailto:engr.umair.ahamd111@gmail.com" aria-label="Send email to Umair Ahmad">
+        <div class="ccard-icon">✉️</div>
+        <div class="ccard-label">Email</div>
+        <div class="ccard-val">engr.umair.ahamd111@gmail.com</div>
+      </a>
+      <a class="ccard reveal" href="https://wa.me/923088025062" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Umair Ahmad">
+        <div class="ccard-icon">💬</div>
+        <div class="ccard-label">WhatsApp</div>
+        <div class="ccard-val">+92-308-8025062</div>
+      </a>
+      <a class="ccard reveal" href="tel:+923088025062" aria-label="Call Umair Ahmad">
+        <div class="ccard-icon">📞</div>
+        <div class="ccard-label">Phone</div>
+        <div class="ccard-val">+92-308-8025062</div>
+      </a>
+      <a class="ccard reveal" href="https://www.linkedin.com/in/umair-ahmad-03585b366/" target="_blank" rel="noopener noreferrer" aria-label="Umair Ahmad LinkedIn profile">
+        <div class="ccard-icon">🔗</div>
+        <div class="ccard-label">LinkedIn</div>
+        <div class="ccard-val">umair-ahmad-03585b366</div>
+      </a>
+      <div class="ccard reveal">
+        <div class="ccard-icon">📍</div>
+        <div class="ccard-label">Location</div>
+        <div class="ccard-val">Peshawar, KPK, Pakistan</div>
+      </div>
+      <div class="ccard reveal">
+        <div class="ccard-icon">🌐</div>
+        <div class="ccard-label">Open To</div>
+        <div class="ccard-val">UAE · Saudi Arabia · Qatar</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <p>
+    © 2026 <span>Umair Ahmad</span> ·
+    BIM Engineer · MEP Revit Modeler &amp; Detailer ·
+    HVAC Ducting &amp; Piping Specialist ·
+    Built for GCC Opportunities
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     PASSWORD MODAL
+════════════════════════════════════════ -->
+<div class="overlay" id="pwdOverlay" role="dialog" aria-modal="true" aria-label="Password required">
+  <div class="modal-box pwd-modal-box">
+    <div class="pwd-lock" aria-hidden="true">🔐</div>
+    <h3>Owner Access Only</h3>
+    <p>This section is protected. Enter your password to manage project images.</p>
+    <div class="pwd-wrap">
+      <input
+        type="password"
+        id="pwdInput"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        maxlength="40"
+        aria-label="Password"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      >
+      <button class="pwd-eye" id="pwdEye" onclick="togglePwdVis()" aria-label="Toggle password visibility">👁️</button>
+    </div>
+    <div class="pwd-error" id="pwdError" role="alert"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closePwdModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="checkPassword()">Unlock ⟶</button>
+    </div>
+    <div class="pwd-hint">Only <span>Umair Ahmad</span> can add or remove project images.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ADD IMAGE MODAL
+════════════════════════════════════════ -->
+<div class="overlay" id="addImgOverlay" role="dialog" aria-modal="true" aria-label="Add project image">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAddModal()" aria-label="Close modal">✕</button>
+    <div class="modal-title">Add Project Image</div>
+
+    <div class="form-group">
+      <label for="pwTitle">Project Title *</label>
+      <input type="text" id="pwTitle" placeholder="e.g. HCA Healthcare — HVAC Ducting Model" maxlength="120">
+    </div>
+
+    <div class="form-group">
+      <label for="pwCat">Category</label>
+      <select id="pwCat">
+        <option>BIM / MEP</option>
+        <option>HVAC Ducting</option>
+        <option>Piping Systems</option>
+        <option>SolidWorks</option>
+        <option>ANSYS / Simulation</option>
+        <option>ABAQUS</option>
+        <option>COMSOL</option>
+        <option>Final Year Project</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pwDesc">Description</label>
+      <textarea id="pwDesc" placeholder="Software used, what you modeled, key outcomes..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Project Image</label>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pwFile').click()" role="button" tabindex="0" aria-label="Upload project image" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('pwFile').click()">
+        <p>Click to upload — <span class="uz-link">browse files</span></p>
+        <p class="uz-sub">JPG, PNG, GIF, WebP — any size</p>
+        <img id="imgPreview" src="" alt="Image preview">
+      </div>
+      <input type="file" id="pwFile" accept="image/*" style="display:none" onchange="handleFileSelect(this)" aria-label="Choose image file">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="addGalleryItem()">Add to Portfolio</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ────────────────────────────────────────
+   CONFIG — change password here
+──────────────────────────────────────── */
+const OWNER_PASSWORD = 'UmairBIM2026';
+const STORAGE_KEY    = 'umair_gallery_v1';
+
+/* ────────────────────────────────────────
+   STATE
+──────────────────────────────────────── */
+let isUnlocked    = false;
+let lockTimer     = null;
+let currentImgB64 = null;
+let galleryItems  = [];
+
+/* ────────────────────────────────────────
+   PROGRESS BAR
+──────────────────────────────────────── */
+function updateProgressBar() {
+  const scrollTop  = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+  const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+/* ────────────────────────────────────────
+   TOAST
+──────────────────────────────────────── */
+function showToast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className   = `toast toast-${type} show`;
+  clearTimeout(el._timer);
+  el._timer = setTimeout(() => { el.classList.remove('show'); }, 3600);
+}
+
+/* ────────────────────────────────────────
+   NAVIGATION
+──────────────────────────────────────── */
+const burger     = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+burger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+});
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+}
+
+// Shrink nav on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  updateProgressBar();
+  highlightNav();
+}, { passive: true });
+
+// Active nav link
+function highlightNav() {
+  const scrollPos = window.scrollY + 120;
+  document.querySelectorAll('section[id]').forEach(sec => {
+    if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + sec.id);
+      });
+    }
+  });
+}
+
+/* ────────────────────────────────────────
+   SCROLL REVEAL
+──────────────────────────────────────── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  revealObserver.observe(el);
+});
+
+/* ────────────────────────────────────────
+   SKILL BARS
+──────────────────────────────────────── */
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.sbar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.25 });
+
+document.querySelectorAll('.skill-bars').forEach(el => barObserver.observe(el));
+
+/* ────────────────────────────────────────
+   TYPING ANIMATION (hero)
+──────────────────────────────────────── */
+const typingPhrases = [
+  'MEP Revit Modeler & Detailer',
+  'HVAC Ducting Specialist',
+  'BIM Coordination Expert',
+  'Clash Detection Engineer',
+  'Piping Systems Designer',
+];
+let tpIdx = 0, tpChar = 0, tpDeleting = false;
+
+function typeLoop() {
+  const el     = document.getElementById('typedText');
+  const phrase = typingPhrases[tpIdx];
+
+  if (!tpDeleting) {
+    el.textContent = phrase.slice(0, ++tpChar);
+    if (tpChar === phrase.length) {
+      tpDeleting = true;
+      setTimeout(typeLoop, 1800);
+      return;
+    }
+    setTimeout(typeLoop, 60);
+  } else {
+    el.textContent = phrase.slice(0, --tpChar);
+    if (tpChar === 0) {
+      tpDeleting = false;
+      tpIdx = (tpIdx + 1) % typingPhrases.length;
+      setTimeout(typeLoop, 300);
+      return;
+    }
+    setTimeout(typeLoop, 35);
+  }
+}
+setTimeout(typeLoop, 800);
+
+/* ────────────────────────────────────────
+   PROJECT TABS
+──────────────────────────────────────── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.classList.remove('on');
+    p.setAttribute('aria-hidden', 'true');
+  });
+  document.querySelectorAll('.ptab').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-selected', 'false');
+  });
+  const pane = document.getElementById('tp-' + id);
+  pane.classList.add('on');
+  pane.setAttribute('aria-hidden', 'false');
+  btn.classList.add('on');
+  btn.setAttribute('aria-selected', 'true');
+}
+
+/* ────────────────────────────────────────
+   PASSWORD MODAL
+──────────────────────────────────────── */
+function openPwdModal(callback) {
+  window._pwdCallback = callback;
+  const overlay = document.getElementById('pwdOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => document.getElementById('pwdInput').focus(), 200);
+}
+
+function closePwdModal() {
+  document.getElementById('pwdOverlay').classList.remove('open');
+  document.getElementById('pwdInput').value = '';
+  document.getElementById('pwdError').textContent = '';
+  document.getElementById('pwdInput').classList.remove('wrong');
+}
+
+function checkPassword() {
+  const input  = document.getElementById('pwdInput');
+  const errEl  = document.getElementById('pwdError');
+  const entered = input.value;
+
+  if (entered === OWNER_PASSWORD) {
+    isUnlocked = true;
+    clearTimeout(lockTimer);
+    // Auto-lock after 15 minutes
+    lockTimer = setTimeout(() => {
+      isUnlocked = false;
+      showToast('🔒 Session locked after inactivity.', 'info');
+    }, 15 * 60 * 1000);
+
+    closePwdModal();
+    if (typeof window._pwdCallback === 'function') {
+      window._pwdCallback();
+    }
+  } else {
+    input.classList.add('wrong');
+    errEl.textContent = '❌ Incorrect password. Try again.';
+    input.value = '';
+    setTimeout(() => {
+      input.classList.remove('wrong');
+      input.focus();
+    }, 500);
+  }
+}
+
+function togglePwdVis() {
+  const input = document.getElementById('pwdInput');
+  const eye   = document.getElementById('pwdEye');
+  if (input.type === 'password') {
+    input.type = 'text';
+    eye.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    eye.textContent = '👁️';
+  }
+}
+
+// Close on backdrop click
+document.getElementById('pwdOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closePwdModal();
+});
+
+/* ────────────────────────────────────────
+   GALLERY — ADD IMAGE MODAL
+──────────────────────────────────────── */
+function openGalleryModal() {
+  if (!isUnlocked) {
+    openPwdModal(() => {
+      document.getElementById('addImgOverlay').classList.add('open');
+    });
+    return;
+  }
+  document.getElementById('addImgOverlay').classList.add('open');
+}
+
+function closeAddModal() {
+  document.getElementById('addImgOverlay').classList.remove('open');
+  document.getElementById('pwTitle').value   = '';
+  document.getElementById('pwDesc').value    = '';
+  document.getElementById('pwCat').value     = 'BIM / MEP';
+  document.getElementById('pwFile').value    = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgPreview').src  = '';
+  currentImgB64 = null;
+}
+
+document.getElementById('addImgOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeAddModal();
+});
+
+/* File select / preview */
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    currentImgB64 = e.target.result;
+    const preview = document.getElementById('imgPreview');
+    preview.src = currentImgB64;
+    preview.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* Drag-and-drop */
+const uploadZone = document.getElementById('uploadZone');
+uploadZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  uploadZone.classList.add('drag-over');
+});
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const fakeInput = { files: [file] };
+    handleFileSelect(fakeInput);
+  }
+});
+
+/* Add gallery item */
+function addGalleryItem() {
+  if (!isUnlocked) return;
+  const title = document.getElementById('pwTitle').value.trim();
+  const cat   = document.getElementById('pwCat').value;
+  const desc  = document.getElementById('pwDesc').value.trim();
+
+  if (!title) {
+    showToast('⚠️ Please enter a project title.', 'error');
+    document.getElementById('pwTitle').focus();
+    return;
+  }
+
+  const item = {
+    id:    Date.now(),
+    title,
+    cat,
+    desc,
+    img:   currentImgB64,
+    added: new Date().toLocaleDateString(),
+  };
+
+  galleryItems.unshift(item);
+  saveGallery();
+  renderGallery();
+  closeAddModal();
+  showToast('✅ Project image added successfully!', 'success');
+}
+
+/* Delete gallery item */
+function deleteGalleryItem(id) {
+  if (!isUnlocked) {
+    openPwdModal(() => confirmDelete(id));
+    return;
+  }
+  confirmDelete(id);
+}
+
+function confirmDelete(id) {
+  if (window.confirm('Remove this project image from your portfolio?')) {
+    galleryItems = galleryItems.filter(i => i.id !== id);
+    saveGallery();
+    renderGallery();
+    showToast('🗑️ Project image removed.', 'info');
+  }
+}
+
+/* Render gallery */
+function renderGallery() {
+  const grid = document.getElementById('pwGrid');
+
+  if (galleryItems.length === 0) {
+    grid.innerHTML = `
+      <div class="pw-empty" role="listitem">
+        <div class="pw-empty-icon">🖼️</div>
+        <p>No project images yet.<br>Click <strong>"＋ Add Project Image"</strong> above to add your first project photo.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = galleryItems.map(item => `
+    <div class="pw-item" role="listitem">
+      ${item.img
+        ? `<div class="pw-img-wrap"><img class="pw-item-img" src="${item.img}" alt="${escapeHtml(item.title)}" loading="lazy"></div>`
+        : `<div class="pw-placeholder" aria-hidden="true">🖼️</div>`
+      }
+      <div class="pw-item-body">
+        <div class="pw-item-cat">${escapeHtml(item.cat)}</div>
+        <div class="pw-item-title">${escapeHtml(item.title)}</div>
+        ${item.desc ? `<div class="pw-item-desc">${escapeHtml(item.desc)}</div>` : ''}
+      </div>
+      <div class="pw-item-footer">
+        <button class="pw-del-btn" onclick="deleteGalleryItem(${item.id})" aria-label="Remove ${escapeHtml(item.title)}">
+          ✕ Remove
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* LocalStorage persistence */
+function saveGallery() {
+  try {
+    // Store without image data if total exceeds ~4MB to avoid quota errors
+    const lightweight = galleryItems.map(item => ({ ...item }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(lightweight));
+  } catch (e) {
+    // Storage quota exceeded — store without images
+    const noImg = galleryItems.map(item => ({ ...item, img: null }));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(noImg)); } catch {}
+    showToast('⚠️ Images too large for local storage — text saved only.', 'error');
+  }
+}
+
+function loadGallery() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      galleryItems = JSON.parse(stored);
+      renderGallery();
+    }
+  } catch (e) {
+    galleryItems = [];
+  }
+}
+
+/* Utility */
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* ────────────────────────────────────────
+   INIT
+──────────────────────────────────────── */
+loadGallery();
+updateProgressBar();
+
+</script>
+</body>
+</html>
